@@ -6,7 +6,7 @@
 /*   By: santadji <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:05:51 by santadji          #+#    #+#             */
-/*   Updated: 2023/05/22 16:24:03 by santadji         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:57:07 by santadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (ret);
 }
-
+/*
 int	main()
 {
 	printf("TEST CHAR\n\n");
@@ -91,13 +91,43 @@ int	main()
 
 	printf("TEST UNSIGNED INT\n\n");
 	unsigned int	u = 45;
-	unsigned int u1 = 2147483647;
+	unsigned int u1 = -2147483647;
 	unsigned int u2 = -45;
 	int retu0 = ft_printf("%u", u);
 	printf("\n");
 	int	retu1 = ft_printf("%u", u1);
 	printf("\n");
 	int	retu2 = ft_printf("%u", u2);
-	printf("\nret1 = %u\nret2 = %u\nret3 = %u\n", retu0, retu1, retu2);
-	printf("vrai printf = %u", -45);
-}
+	printf("\nret1 = %u\nret2 = %u\nret3 = %u\n\n\n", retu0, retu1, retu2);
+
+	printf("TEST HEXA MIN\n\n");
+	int	x = 45;
+	int x1 = 2147483648;
+	int x2 = 255;
+	int retx0 = ft_printf("%x", x);
+	printf("\n");
+	int	retx1 = ft_printf("%x", x1);
+	printf("\n");
+	int	retx2 = ft_printf("%x", x2);
+	printf("\nret1 = %x\nret2 = %x\nret3 = %x\n\n\n", retx0, retx1, retx2);
+	
+	printf("TEST HEXA MAJ\n\n");
+	int	X = 45;
+	int X1 = -2147483648;
+	int X2 = 255;
+	int retX0 = ft_printf("%X", X);
+	printf("\n");
+	int	retX1 = ft_printf("%X", X1);
+	printf("\n");
+	int	retX2 = ft_printf("%X", X2);
+	printf("\nret1 = %X\nret2 = %X\nret3 = %X\n\n\n", retX0, retX1, retX2);
+
+	printf("TEST ADRESS\n\n");
+//	void *p = 45;
+//	void *p1 = -2147483648;
+//	void *p2 = 45;
+	ft_printf("%p\n", -1);
+	ft_printf("%p\n", 15);
+	ft_printf("%p\n", 17);
+//	printf("\nret1 = %p\nret2 = %p\nret3 = %p\n\n\n", retp0, retp1, retp2);
+}*/
