@@ -6,7 +6,7 @@
 /*   By: santadji <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:05:51 by santadji          #+#    #+#             */
-/*   Updated: 2023/05/27 18:57:07 by santadji         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:49:20 by santadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,13 @@ int	main()
 	printf("\nret1 = %X\nret2 = %X\nret3 = %X\n\n\n", retX0, retX1, retX2);
 
 	printf("TEST ADRESS\n\n");
-//	void *p = 45;
-//	void *p1 = -2147483648;
-//	void *p2 = 45;
-	ft_printf("%p\n", -1);
-	ft_printf("%p\n", 15);
-	ft_printf("%p\n", 17);
-//	printf("\nret1 = %p\nret2 = %p\nret3 = %p\n\n\n", retp0, retp1, retp2);
+	int p = 45;
+	int p1 = -2147483648;
+	int p2 = 45;
+	int retp0 = ft_printf("%p\n", NULL);
+	int retp1 = ft_printf("%p\n", 15);
+	int retp2 = ft_printf("%p\n", 17);
+	//int retp4 = printf("%p\n", NULL);
+	printf("\nret1 = %d\nret2 = %d\nret3 = %d\n\n\n", retp0, retp1, retp2);
+
 }*/

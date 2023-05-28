@@ -6,14 +6,55 @@
 /*   By: santadji <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:01:48 by santadji          #+#    #+#             */
-/*   Updated: 2023/05/27 19:25:32 by santadji         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:48:01 by santadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 int	ft_strlen(char *str);
+void ft_putstr_fd_printf(char *str, int fd, int *ret);
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+static char	*ft_strcpy(char *dest, char *src)
+{
+	int	i;
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strdup(const char *src)
+{
+	char	*new;
+	int		len;
+
+	len = ft_strlen((char *)src) + 1;
+	new = malloc(len * sizeof(char));
+	if (!new)
+		return (NULL);
+	ft_strcpy(new, (char *)src);
+	return (new);
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -75,65 +116,40 @@ char	*ft_itoa_base(unsigned int n, char *base)
 	}
 	return (str);
 }
-/*
-void	reverse(char *str)
-{
-	int	len;
-	int	i;
-	int	j;
-	char	tmp;
 
-	i = 0;
-	len = ft_strlen(str);
-	j = len - 1;
-	while (i < j)
-	{
-		tmp = str[i];
-		str[i] = str[j];
-		str[j] = tmp;
-		i++;
-		j--;
-	}
+char	*check_ad(unsigned long long n, char *base)
+{
+	if (n == 0)
+		return (ft_strdup("(nil)"));
+	else
+		return (ft_itoa_base(n, base));
 }
 
-char	*ft_itoa_base(int n, char *base)
+void	itoa_free(va_list *args, int *ret, char c)
 {
-	int		i;
-	int		len;
-	int		tmp;
-	char	*res;
+	char	*s1;
+	char	*str;
 
-	if (n == 0)
+	str = NULL;
+	if (c == 'x')
 	{
-		res = malloc(sizeof(char) * 2);
-		if (!res)
-			return (NULL);
-		res[0] = '0';
-		res[1] = '\0';
-		return (res);
+		str = ft_itoa_base(va_arg(*args, unsigned int), "0123456789abcdef");
+		ft_putstr_fd_printf(str, 1, ret);
 	}
-	len = 0;
-	tmp = n;
-	while (tmp != 0)
+	if (c == 'X')
 	{
-		len++;
-		tmp /= ft_strlen(base);
+		str = ft_itoa_base(va_arg(*args, unsigned int), "0123456789ABCDEF");
+		ft_putstr_fd_printf(str, 1, ret);
 	}
-	res = malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (n != 0)
+	if (c == 'p')
 	{
-		tmp = n % ft_strlen(base);
-		if (tmp > 9)
-			res[i] = (tmp - 10) + '0';
+		s1 = check_ad(va_arg(*args, unsigned long long), "0123456789abcdef");
+		str = ft_strjoin("0x", s1);
+		if (ft_strncmp("(nil)", s1, 5) != 0)
+			ft_putstr_fd_printf(str, 1, ret);
 		else
-			res[i] = tmp + '0';
-		n /= ft_strlen(base);
-		i++;
+			ft_putstr_fd_printf(s1, 1, ret);
+		free(s1);
 	}
-	res[i] = '\0';
-	reverse(res);
-	return (res);
-}*/
+	free(str);
+}

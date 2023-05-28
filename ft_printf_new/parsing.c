@@ -6,7 +6,7 @@
 /*   By: santadji <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:09:20 by santadji          #+#    #+#             */
-/*   Updated: 2023/05/27 19:11:30 by santadji         ###   ########.fr       */
+/*   Updated: 2023/05/28 15:29:27 by santadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdarg.h>
 
 char	*ft_itoa_base(int n, char *base);
+void	itoa_free(va_list *arg, int *ret, char c);
 
 void	ft_putchar_fd_printf(char c, int fd, int *ret)
 {
@@ -78,13 +79,16 @@ void	ft_type(va_list *args, char *str, int i, int *ret)
 	if (str[i] == 'u')
 		ft_putnbr_fd_unsigned_printf(va_arg(*args, unsigned int), 1, ret);
 	if (str[i] == 'x')
-		ft_putstr_fd_printf(ft_itoa_base(va_arg(*args, unsigned int), "0123456789abcdef"), 1, ret);
+		itoa_free(args, ret, str[i]);
 	if (str[i] == 'X')
-		ft_putstr_fd_printf(ft_itoa_base(va_arg(*args, unsigned int), "0123456789ABCDEF"), 1, ret);
+		itoa_free(args, ret, str[i]);
 	if (str[i] == 'p')
 	{
-		ft_putstr_fd_printf("0x", 1, ret);
-		ft_putstr_fd_printf(ft_itoa_base(va_arg(*args, unsigned long long), "0123456789abcdef"), 1, ret);
+	//	ft_putstr_fd_printf("0x", 1, ret);
+		itoa_free(args, ret, str[i]);
 	}
+//		ft_putstr_fd_printf(ft_itoa_base(va_arg(*args, unsigned long long),
+//		"0123456789abcdef"), 1, ret);
+	
 }
 
